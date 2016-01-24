@@ -50,10 +50,9 @@ class VendingMachine
   end
 end
 
+x = VendingMachine.new
 
-# x = VendingMachine.new
-
-# x.validate(1,1)
+x.validate(1,1)
 # x.validate(2,2)
 # x.validate(3,3)
 # p x.current_amount

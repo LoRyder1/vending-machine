@@ -45,4 +45,13 @@ describe VendingMachine do
       expect(@vending.display).to eq "INSERT COIN"
     end
   end
+
+  describe 'select' do
+    it "dispenses product if enough change with display 'THANK YOU'" do
+      @vending.validate(3,3)
+      @vending.validate(3,3)
+      @vending.select("chips")
+      expect(@vending.display).to eq 'THANK YOU'
+    end
+  end
 end
