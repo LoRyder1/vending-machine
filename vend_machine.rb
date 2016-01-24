@@ -10,6 +10,7 @@ require 'pry'
 
 class VendingMachine
   PRODUCTS = {"cola":100 , "chips":50, "candy":65}
+  AVAILABLE = {"cola": false, "chips": true, "candy": true}
   attr_reader :current_amount, :coin_return
   def initialize
     @current_amount = 0
@@ -59,7 +60,10 @@ class VendingMachine
 
   def select(product)
     price = PRODUCTS[product.to_sym]
-    if price <= @current_amount
+    avble = AVAILABLE[product.to_sym]
+    if avble == false
+      @mesg = 'SOLD OUT'
+    elsif price <= @current_amount
       @current_amount -= price
       @coin_return = @current_amount
       @current_amount = 0
