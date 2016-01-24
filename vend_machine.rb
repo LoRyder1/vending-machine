@@ -16,7 +16,11 @@ class VendingMachine
   end
 
   def display
-    @current_amount.to_s  
+    if @current_amount == 0
+      "INSERT COIN"
+    else
+      @current_amount.to_s  
+    end
   end
 
   def validate(weight, size)
