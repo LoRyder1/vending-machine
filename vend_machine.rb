@@ -19,5 +19,5 @@ class VendingMachine
       false
     end
   end
-  
+
 end
