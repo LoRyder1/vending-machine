@@ -28,11 +28,7 @@ class VendingMachine
       @mesg = nil
       current_display
     elsif @current_amount == 0
-      if @change == false
-        "EXACT CHANGE ONLY"
-      else
-        "INSERT COIN"
-      end
+      @change == false ? "EXACT CHANGE ONLY" : "INSERT COIN"
     else
       @current_amount.to_s  
     end
@@ -41,10 +37,8 @@ class VendingMachine
   def validate(weight, size)
     @weight = weight
     @size = size
-
     okay_weight = [1,2,3].include? weight
     okay_size = [1,2,3].include? size
-    
     if okay_weight && okay_size
       add_amount
       true
