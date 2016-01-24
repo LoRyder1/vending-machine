@@ -15,6 +15,10 @@ class VendingMachine
     @size = nil
   end
 
+  def display
+    @current_amount.to_s  
+  end
+
   def validate(weight, size)
     @weight = weight
     @size = size
