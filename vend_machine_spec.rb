@@ -91,4 +91,13 @@ describe VendingMachine do
       expect(@vending.coin_return).to eq 10
     end
   end
+
+  describe 'return_coin' do
+    it "returns current amount of money in machine and display shows 'INSERT COIN'" do
+      @vending.validate(3,3)
+      expect(@vending.return_coin).to eq 25
+      expect(@vending.current_amount).to eq 0
+      expect(@vending.display).to eq 'INSERT COIN'
+    end
+  end
 end
