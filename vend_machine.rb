@@ -11,6 +11,7 @@ require 'pry'
 class VendingMachine
   PRODUCTS = {"cola":100 , "chips":50, "candy":65}
   attr_reader :current_amount, :coin_return
+  attr_accessor :change
   def initialize
     @availability = {"cola": false, "chips": true, "candy": true}
     @current_amount = 0
@@ -18,6 +19,7 @@ class VendingMachine
     @weight = nil
     @size = nil
     @mesg = nil
+    @change = true
   end
 
   def display
@@ -26,7 +28,11 @@ class VendingMachine
       @mesg = nil
       current_display
     elsif @current_amount == 0
-      "INSERT COIN"
+      if @change == false
+        "EXACT CHANGE ONLY"
+      else
+        "INSERT COIN"
+      end
     else
       @current_amount.to_s  
     end
