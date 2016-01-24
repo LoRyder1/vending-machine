@@ -6,6 +6,9 @@ describe 'insert_coins' do
     expect(insert_coin(1,1)).to eq true
     expect(insert_coin(3,3)).to eq true
   end
-end
 
-# and reject invalid ones
+  it 'should reject invalid coins' do
+    expect(insert_coin(4,1)).to eq false
+    expect(insert_coin(1,4)).to eq false
+  end
+end
