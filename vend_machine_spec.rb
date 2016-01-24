@@ -115,4 +115,11 @@ describe VendingMachine do
       expect(@vending.display).to eq '25'
     end
   end
+
+  describe 'Exact Change Only' do
+    it 'display EXACT CHANGE ONLY when machine has no change' do
+      @vending.change = false
+      expect(@vending.display).to eq 'EXACT CHANGE ONLY'
+    end
+  end
 end
