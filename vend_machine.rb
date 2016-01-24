@@ -18,8 +18,10 @@ class VendingMachine
   end
 
   def display
+    current_display = @mesg
     if @mesg != nil
-      @mesg
+      @mesg = nil
+      current_display
     elsif @current_amount == 0
       "INSERT COIN"
     else
