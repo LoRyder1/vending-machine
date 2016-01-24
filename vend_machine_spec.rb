@@ -68,5 +68,19 @@ describe VendingMachine do
       @vending.select("candy")
       expect(@vending.display).to eq 'PRICE: 65'
     end
+
+    it 'subsequent checks after not enough display current amount if there is money' do
+      @vending.validate(3,3)
+      @vending.validate(3,3)
+      @vending.select("candy")
+      @vending.display
+      expect(@vending.display).to eq '50'
+    end
+
+    it "subsequent checks after not enough display INSERT COIN' if no money" do
+      @vending.select("candy")
+      expect(@vending.display).to eq 'PRICE: 65'
+      expect(@vending.display).to eq 'INSERT COIN'
+    end
   end
 end

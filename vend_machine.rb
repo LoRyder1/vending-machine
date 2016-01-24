@@ -1,3 +1,4 @@
+require 'pry'
 # Vending Machine Kata
 
 # Accept Coins: nickels, dimes, quarters
@@ -57,9 +58,11 @@ class VendingMachine
 
   def select(product)
     price = PRODUCTS[product.to_sym]
-    if price >= @current_amount
+    if price <= @current_amount
       @current_amount -= price
       @mesg = 'THANK YOU'
+    elsif price > @current_amount
+      @mesg = "PRICE: #{price}"
     end
   end
 end
