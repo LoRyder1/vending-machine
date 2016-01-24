@@ -14,8 +14,6 @@ class VendingMachine
   def initialize
     @current_amount = 0
     @coin_return = 0
-    @weight = nil
-    @size = nil
     @mesg = nil
     @change = true
   end
@@ -32,26 +30,30 @@ class VendingMachine
     end
   end
 
-  def validate weight, size
-    @weight = weight
-    @size = size
-    okay_weight = [1,2,3].include? weight
-    okay_size = [1,2,3].include? size
-    if okay_weight && okay_size
-      add_amount
+  def validate coin
+    w = valid?(coin.weight)
+    s = valid?(coin.size)
+    if w && s
+      add_amount(coin)
       true
     else
       false
     end
   end
 
-  def add_amount
+  def valid?(value)
+    [1,2,3].include?(value)
+  end
+
+  def add_amount(coin)
+    w = coin.weight
+    s = coin.size
     case 
-    when @weight == 2 && @size == 2
+    when w == 2 && s == 2
       @current_amount += 5
-    when @weight == 1 && @size == 1
+    when w == 1 && s == 1
       @current_amount += 10
-    when @weight == 3 && @size == 3
+    when w == 3 && s == 3
       @current_amount += 25
     end
   end
@@ -99,13 +101,16 @@ class Product
   end
 end
 
-cola = Product.new("cola",100,0)
-chips = Product.new("chips",50,5)
-candy = Product.new("candy",65,5)
+# cola = Product.new("cola",100,0)
+# chips = Product.new("chips",50,5)
+# candy = Product.new("candy",65,5)
 
-dime = Coin.new(1,1)
-nickel = Coin.new(2,2)
-quarter = Coin.new(3,3)
+# dime = Coin.new(1,1)
+# nickel = Coin.new(2,2)
+# quarter = Coin.new(3,3)
+# bad = Coin.new(1,4)
+
+# x = VendingMachine.new
 
 # p cola.available?
 # p chips.available?
