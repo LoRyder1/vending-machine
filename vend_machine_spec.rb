@@ -82,5 +82,13 @@ describe VendingMachine do
       expect(@vending.display).to eq 'PRICE: 65'
       expect(@vending.display).to eq 'INSERT COIN'
     end
+
+    it "coin return collects leftover money after selection" do
+      @vending.validate(3,3)
+      @vending.validate(3,3)
+      @vending.validate(1,1)
+      @vending.select("chips")
+      expect(@vending.coin_return).to eq 10
+    end
   end
 end
