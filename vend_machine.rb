@@ -10,9 +10,10 @@ require 'pry'
 
 class VendingMachine
   PRODUCTS = {"cola":100 , "chips":50, "candy":65}
-  attr_reader :current_amount
+  attr_reader :current_amount, :coin_return
   def initialize
     @current_amount = 0
+    @coin_return = 0
     @weight = nil
     @size = nil
     @mesg = nil
@@ -60,17 +61,11 @@ class VendingMachine
     price = PRODUCTS[product.to_sym]
     if price <= @current_amount
       @current_amount -= price
+      @coin_return = @current_amount
+      @current_amount = 0
       @mesg = 'THANK YOU'
     elsif price > @current_amount
       @mesg = "PRICE: #{price}"
     end
   end
 end
-
-x = VendingMachine.new
-
-x.validate(1,1)
-
-# x.validate(2,2)
-# x.validate(3,3)
-# p x.current_amount
