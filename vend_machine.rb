@@ -68,4 +68,11 @@ class VendingMachine
       @mesg = "PRICE: #{price}"
     end
   end
+
+  def return_coin
+    to_return = @current_amount
+    @current_amount = 0
+    display
+    to_return
+  end
 end
