@@ -7,11 +7,12 @@
 # dimes/1/1
 # quarters/3/3
 
+
 def insert_coin(weight, size)
-  good_weight = [1,2,3].include? weight
-  good_size = [1,2,3].include? size
+  okay_weight = [1,2,3].include? weight
+  okay_size = [1,2,3].include? size
   
-  if good_weight && good_size
+  if okay_weight && okay_size
     true
   else
     false
