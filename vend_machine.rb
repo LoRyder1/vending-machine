@@ -9,11 +9,9 @@ require 'pry'
 # quarters/3/3
 
 class VendingMachine
-  PRODUCTS = {"cola":100 , "chips":50, "candy":65}
   attr_reader :current_amount, :coin_return
   attr_accessor :change
   def initialize
-    @availability = {"cola": false, "chips": true, "candy": true}
     @current_amount = 0
     @coin_return = 0
     @weight = nil
@@ -34,7 +32,7 @@ class VendingMachine
     end
   end
 
-  def validate(weight, size)
+  def validate weight, size
     @weight = weight
     @size = size
     okay_weight = [1,2,3].include? weight
@@ -58,19 +56,21 @@ class VendingMachine
     end
   end
 
-  def select(product)
-    price = PRODUCTS[product.to_sym]
-    avble = @availability[product.to_sym]
-    if avble == false
+  def select product
+    if product.unavailable?
       @mesg = 'SOLD OUT'
-    elsif price <= @current_amount
-      @current_amount -= price
-      @coin_return = @current_amount
-      @current_amount = 0
+    elsif @current_amount >= product.price
+      purchase(product.price)
       @mesg = 'THANK YOU'
-    elsif price > @current_amount
-      @mesg = "PRICE: #{price}"
+    elsif @current_amount < product.price
+      @mesg = "PRICE: #{product.price}"
     end
+  end
+
+  def purchase price
+    @current_amount -= price
+    @coin_return = @current_amount
+    @current_amount = 0
   end
 
   def return_coin
@@ -80,3 +80,32 @@ class VendingMachine
     to_return
   end
 end
+
+class Coin
+  attr_reader :weight, :size
+  def initialize weight, size
+    @weight, @size = weight, size
+  end
+end
+
+class Product
+  attr_reader :name, :price, :quantity
+  def initialize name, price, quantity
+    @name, @price, @quantity = name, price, quantity
+  end
+
+  def unavailable?
+    self.quantity == 0 ? true : false
+  end
+end
+
+cola = Product.new("cola",100,0)
+chips = Product.new("chips",50,5)
+candy = Product.new("candy",65,5)
+
+dime = Coin.new(1,1)
+nickel = Coin.new(2,2)
+quarter = Coin.new(3,3)
+
+# p cola.available?
+# p chips.available?

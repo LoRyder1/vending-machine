@@ -3,6 +3,9 @@ require_relative 'vend_machine'
 describe VendingMachine do
   before(:each) do 
     @vending = VendingMachine.new
+    @cola = Product.new("cola",100,0)
+    @chips = Product.new("chips",50,5)
+    @candy = Product.new("candy",65,5)
   end
 
   describe 'initialize' do
@@ -50,14 +53,14 @@ describe VendingMachine do
     it "dispenses product if enough change with display 'THANK YOU'" do
       @vending.validate(3,3)
       @vending.validate(3,3)
-      @vending.select("chips")
+      @vending.select(@chips)
       expect(@vending.display).to eq 'THANK YOU'
     end
 
     it "after displaying 'THANK YOU' machine next displays 'INSERT COIN'" do
       @vending.validate(3,3)
       @vending.validate(3,3)
-      @vending.select("chips")
+      @vending.select(@chips)
       @vending.display
       expect(@vending.display).to eq 'INSERT COIN'
     end
@@ -65,20 +68,20 @@ describe VendingMachine do
     it "if not enough money display 'PRICE: x'" do
       @vending.validate(3,3)
       @vending.validate(3,3)
-      @vending.select("candy")
+      @vending.select(@candy)
       expect(@vending.display).to eq 'PRICE: 65'
     end
 
     it 'subsequent checks after not enough display current amount if there is money' do
       @vending.validate(3,3)
       @vending.validate(3,3)
-      @vending.select("candy")
+      @vending.select(@candy)
       @vending.display
       expect(@vending.display).to eq '50'
     end
 
     it "subsequent checks after not enough display INSERT COIN' if no money" do
-      @vending.select("candy")
+      @vending.select(@candy)
       expect(@vending.display).to eq 'PRICE: 65'
       expect(@vending.display).to eq 'INSERT COIN'
     end
@@ -87,7 +90,7 @@ describe VendingMachine do
       @vending.validate(3,3)
       @vending.validate(3,3)
       @vending.validate(1,1)
-      @vending.select("chips")
+      @vending.select(@chips)
       expect(@vending.coin_return).to eq 10
     end
   end
@@ -103,14 +106,14 @@ describe VendingMachine do
 
   describe 'when product is SOLD OUT' do
     it 'after selecting a product, check to see if SOLD OUT' do
-      @vending.select("cola")
+      @vending.select(@cola)
       expect(@vending.display).to eq 'SOLD OUT'
       expect(@vending.display).to eq 'INSERT COIN'
     end
 
     it 'display SOLD OUT, then appropriate message' do
       @vending.validate(3,3)
-      @vending.select("cola")
+      @vending.select(@cola)
       @vending.display
       expect(@vending.display).to eq '25'
     end
