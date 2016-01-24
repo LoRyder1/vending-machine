@@ -8,15 +8,19 @@
 # quarters/3/3
 
 class VendingMachine
+  PRODUCTS = {"cola":100 , "chips":50, "candy":65}
   attr_reader :current_amount
   def initialize
     @current_amount = 0
     @weight = nil
     @size = nil
+    @mesg = nil
   end
 
   def display
-    if @current_amount == 0
+    if @mesg != nil
+      @mesg
+    elsif @current_amount == 0
       "INSERT COIN"
     else
       @current_amount.to_s  
@@ -46,6 +50,14 @@ class VendingMachine
       @current_amount += 10
     when @weight == 3 && @size == 3
       @current_amount += 25
+    end
+  end
+
+  def select(product)
+    price = PRODUCTS[product.to_sym]
+    if price >= @current_amount
+      @current_amount -= price
+      @mesg = 'THANK YOU'
     end
   end
 end
