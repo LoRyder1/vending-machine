@@ -13,7 +13,7 @@ class VendingMachine
     @current_amount = 0
   end
 
-  def insert_coin(weight, size)
+  def validate(weight, size)
     okay_weight = [1,2,3].include? weight
     okay_size = [1,2,3].include? size
     

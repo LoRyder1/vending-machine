@@ -2,29 +2,34 @@ require_relative 'vend_machine'
 
 describe VendingMachine do
   before(:each) do 
-    @coin = VendingMachine.new
+    @vending = VendingMachine.new
   end
 
   describe 'initialize' do
-    it 'coin should be instance of class VendingMachine' do
-      expect(@coin.class).to eq(VendingMachine)
+    it 'vending should be instance of class VendingMachine' do
+      expect(@vending.class).to eq(VendingMachine)
     end
 
     it 'starting amount should be zero'do
-      expect(@coin.current_amount).to eq 0
+      expect(@vending.current_amount).to eq 0
     end
   end
 
-  describe 'insert_coin' do
+  describe 'validate' do
     it 'should accept valid coins: nickels, dimes, quarters' do
-      expect(@coin.insert_coin(2,2)).to eq true
-      expect(@coin.insert_coin(1,1)).to eq true
-      expect(@coin.insert_coin(3,3)).to eq true
+      expect(@vending.validate(2,2)).to eq true
+      expect(@vending.validate(1,1)).to eq true
+      expect(@vending.validate(3,3)).to eq true
     end
 
     it 'should reject invalid coin with different weight or size' do
-      expect(@coin.insert_coin(4,1)).to eq false
-      expect(@coin.insert_coin(1,4)).to eq false
+      expect(@vending.validate(4,1)).to eq false
+      expect(@vending.validate(1,4)).to eq false
+    end
+
+    it 'when valid coin is added, the value is added to current amount' do
+      @vending.validate(1,1)
+      expect(@vending.current_amount).to eq 10
     end
   end
 end
