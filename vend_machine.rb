@@ -8,6 +8,10 @@
 # quarters/3/3
 
 class VendingMachine
+  attr_reader :current_amount
+  def initialize
+    @current_amount = 0
+  end
 
   def insert_coin(weight, size)
     okay_weight = [1,2,3].include? weight
@@ -19,5 +23,4 @@ class VendingMachine
       false
     end
   end
-
 end

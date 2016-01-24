@@ -6,16 +6,16 @@ describe VendingMachine do
   end
 
   describe 'initialize' do
-    it 'starting amount should be zero'do
-      @coin.current_amount.to eq 0
-    end
-  end
-
-  describe 'insert_coin' do
     it 'coin should be instance of class VendingMachine' do
       expect(@coin.class).to eq(VendingMachine)
     end
 
+    it 'starting amount should be zero'do
+      expect(@coin.current_amount).to eq 0
+    end
+  end
+
+  describe 'insert_coin' do
     it 'should accept valid coins: nickels, dimes, quarters' do
       expect(@coin.insert_coin(2,2)).to eq true
       expect(@coin.insert_coin(1,1)).to eq true
