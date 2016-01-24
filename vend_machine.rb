@@ -8,5 +8,6 @@
 # quarters/3/3
 
 def insert_coin(weight, size)
-  
+  true
 end
+
