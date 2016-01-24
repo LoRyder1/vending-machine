@@ -26,10 +26,17 @@ describe VendingMachine do
       expect(@vending.validate(4,1)).to eq false
       expect(@vending.validate(1,4)).to eq false
     end
+  end
 
+  describe 'add_amount' do
     it 'when valid coin is added, the value is added to current amount' do
       @vending.validate(1,1)
       expect(@vending.current_amount).to eq 10
+    end
+
+    it 'updates the display with coin amount' do
+      @vending.validate(1,1)
+      expect(@vending.display).to eq "10"
     end
   end
 end
