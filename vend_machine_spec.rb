@@ -103,9 +103,16 @@ describe VendingMachine do
 
   describe 'when product is SOLD OUT' do
     it 'after selecting a product, check to see if SOLD OUT' do
-      @vending.validate(3,3)
       @vending.select("cola")
       expect(@vending.display).to eq 'SOLD OUT'
+      expect(@vending.display).to eq 'INSERT COIN'
+    end
+
+    it 'display SOLD OUT, then appropriate message' do
+      @vending.validate(3,3)
+      @vending.select("cola")
+      @vending.display
+      expect(@vending.display).to eq '25'
     end
   end
 end
