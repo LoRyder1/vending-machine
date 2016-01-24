@@ -8,6 +8,12 @@
 # quarters/3/3
 
 def insert_coin(weight, size)
-  true
+  good_weight = [1,2,3].include? weight
+  good_size = [1,2,3].include? size
+  
+  if good_weight && good_size
+    true
+  else
+    false
+  end
 end
-

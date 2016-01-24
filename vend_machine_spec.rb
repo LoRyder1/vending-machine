@@ -7,7 +7,7 @@ describe 'insert_coins' do
     expect(insert_coin(3,3)).to eq true
   end
 
-  it 'should reject invalid coins' do
+  it 'should reject invalid coin with different weight or size' do
     expect(insert_coin(4,1)).to eq false
     expect(insert_coin(1,4)).to eq false
   end
