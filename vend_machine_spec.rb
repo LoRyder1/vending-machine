@@ -100,4 +100,11 @@ describe VendingMachine do
       expect(@vending.display).to eq 'INSERT COIN'
     end
   end
+
+  describe 'when product is SOLD OUT' do
+    it 'after selecting a product check to see if SOLD OUT' do
+      @vending.select("cola")
+      expect(@vending.display).to eq 'SOLD OUT'
+    end
+  end
 end
